@@ -33,13 +33,13 @@ The construction industry generates 1.3 billion tons of waste annually. Digital 
 
 ### Phase 1: Foundation (Weeks 1-4)
 - [x] Data acquisition and exploration
-- [ ] Baseline regression models (Linear, Random Forest, XGBoost)
-- [ ] Feature engineering for recyclability scoring
-- [ ] Sustainability metrics calculation
+- [x] Baseline regression models (Linear, Random Forest, XGBoost)
+- [x] Feature engineering for recyclability scoring
+- [x] Sustainability metrics calculation
 
 ### Phase 2: Deep Learning (Weeks 5-8)
-- [ ] Neural network for strength prediction
-- [ ] Multi-task learning (strength + recyclability)
+- [x] Neural network for strength prediction
+- [x] Multi-task learning (strength + recyclability)
 - [ ] Compositional optimization using RL
 - [ ] Transfer learning preparation
 
