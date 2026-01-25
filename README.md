@@ -2,15 +2,15 @@
 
 **Tagline:** Enabling Circular Economy Through AI-Powered Material Intelligence
 
-## 🎯 Project Vision
+## Project Vision
 
 An AI-driven web application that automatically generates digital material passports for building products, enabling transparency in material composition and facilitating circular economy practices in the construction industry.
 
-## 🌟 Why This Matters
+## Why This Matters
 
 The construction industry generates 1.3 billion tons of waste annually. Digital Material Passports are becoming mandatory in the EU (Digital Product Passport initiative) to enable circular economy. This project demonstrates how AI/ML can automate the creation of these critical documents.
 
-## 📊 Dataset
+## Dataset
 
 **Primary Dataset:** Concrete Compressive Strength (UCI ML Repository)
 - **Source:** https://archive.ics.uci.edu/dataset/165/concrete+compressive+strength
@@ -20,8 +20,8 @@ The construction industry generates 1.3 billion tons of waste annually. Digital 
 
 ### Dataset Features:
 1. **Cement** (kg/m³) - Primary binding material
-2. **Blast Furnace Slag** (kg/m³) - Industrial waste byproduct (circular economy!)
-3. **Fly Ash** (kg/m³) - Coal combustion byproduct (waste reuse!)
+2. **Blast Furnace Slag** (kg/m³) - Industrial waste byproduct (circular economy)
+3. **Fly Ash** (kg/m³) - Coal combustion byproduct (waste reuse)
 4. **Water** (kg/m³) - Hydration agent
 5. **Superplasticizer** (kg/m³) - Chemical additive
 6. **Coarse Aggregate** (kg/m³) - Large particles
@@ -29,7 +29,7 @@ The construction industry generates 1.3 billion tons of waste annually. Digital 
 8. **Age** (days) - Curing time
 9. **Compressive Strength** (MPa) - Target variable
 
-## 🧠 AI/ML Components
+## AI/ML Components
 
 ### Phase 1: Foundation (Weeks 1-4)
 - [x] Data acquisition and exploration
@@ -49,7 +49,7 @@ The construction industry generates 1.3 billion tons of waste annually. Digital 
 - [ ] Knowledge graph construction
 - [ ] Recommendation engine for sustainable alternatives
 
-## 🎓 Learning Objectives
+## Learning Objectives
 
 As a sustainability program manager transitioning to AI/ML for impact, this project demonstrates:
 
@@ -71,7 +71,7 @@ As a sustainability program manager transitioning to AI/ML for impact, this proj
    - Regulatory landscape (EU DPP)
    - Life cycle assessment (LCA)
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 material-passport-generator/
@@ -102,7 +102,7 @@ material-passport-generator/
 └── README.md
 ```
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 - Python 3.9+
@@ -129,7 +129,7 @@ python src/data/download_dataset.py
 jupyter notebook notebooks/01_data_exploration.ipynb
 ```
 
-## 📈 Key Metrics & Success Criteria
+## Key Metrics & Success Criteria
 
 ### Technical Metrics:
 - **Strength Prediction:** R² > 0.85, RMSE < 5 MPa
@@ -146,14 +146,14 @@ jupyter notebook notebooks/01_data_exploration.ipynb
 - **Adoption:** Target 100 synthetic passports generated
 - **Accuracy:** 95% composition extraction accuracy
 
-## 🎯 Use Cases
+## Use Cases
 
 1. **Manufacturer:** Auto-generate material passports for product catalog
 2. **Architect:** Evaluate material sustainability during design phase
 3. **Recycler:** Assess recyclability of demolition materials
 4. **Regulator:** Verify compliance with circular economy regulations
 
-## 📚 Documentation Strategy
+## Documentation Strategy
 
 ### Product Management Artifacts:
 1. **Product Requirements Document (PRD)**
@@ -180,7 +180,7 @@ jupyter notebook notebooks/01_data_exploration.ipynb
    - Partnership opportunities
    - Business model exploration
 
-## 🤝 Alignment with Google DeepMind Impact Roles
+## Alignment with Google DeepMind Impact Roles
 
 This project demonstrates key competencies for the Portfolio Lead positions:
 
@@ -191,7 +191,7 @@ This project demonstrates key competencies for the Portfolio Lead positions:
 - **Technical Bridge:** Translating ML capabilities to domain solutions
 - **Innovation:** Novel approach to automating material passports
 
-## 📖 References & Citations
+## References & Citations
 
 **Dataset:**
 - Yeh, I-C. (1998). "Modeling of strength of high-performance concrete using artificial neural networks." *Cement and Concrete Research*, 28(12), 1797-1808.
@@ -202,11 +202,11 @@ This project demonstrates key competencies for the Portfolio Lead positions:
 **Digital Product Passports:**
 - European Commission. (2022). "Proposal for Ecodesign for Sustainable Products Regulation"
 
-## 📝 License
+## License
 
 This project is for educational and portfolio purposes. Dataset used under CC BY 4.0 license.
 
-## 👤 Author
+## Author
 
 **[Your Name]**
 - Sustainability Program Manager @ Siemens
@@ -215,4 +215,4 @@ This project is for educational and portfolio purposes. Dataset used under CC BY
 
 ---
 
-*Built with passion for sustainable construction and circular economy* 🌱♻️
+Built with passion for sustainable construction and circular economy
