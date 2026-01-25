@@ -76,30 +76,43 @@ As a sustainability program manager transitioning to AI/ML for impact, this proj
 ```
 material-passport-generator/
 ├── data/
-│   ├── raw/              # Original datasets
-│   ├── processed/        # Cleaned and transformed data
-│   └── synthetic/        # Generated training data
-├── notebooks/
-│   ├── 01_data_exploration.ipynb
-│   ├── 02_baseline_models.ipynb
-│   ├── 03_deep_learning.ipynb
-│   └── 04_sustainability_scoring.ipynb
+│   ├── raw/                          # Original datasets
+│   │   ├── concrete_data.csv         # Concrete composition data (UCI dataset)
+│   │   └── metadata.txt              # Dataset documentation
+│   └── processed/                    # Cleaned and transformed data
+│       ├── concrete_enriched.csv     # Enriched dataset with sustainability metrics
+│       ├── dataset_summary.txt       # Statistical summary
+│       └── exploration_summary.csv   # Exploratory analysis results
+├── notebooks/                        # Jupyter notebooks for analysis
+│   ├── 01_data_exploration.ipynb     # Data exploration and visualization
+│   ├── 02_baseline_models.ipynb      # Baseline ML models (Linear, RF, XGBoost)
+│   └── 03_deep_learning.ipynb        # Neural networks and deep learning
 ├── src/
-│   ├── data/             # Data loading and preprocessing
-│   ├── models/           # ML model definitions
-│   ├── features/         # Feature engineering
-│   └── utils/            # Helper functions
-├── models/               # Saved trained models
+│   ├── data/                         # Data loading and preprocessing
+│   │   ├── __init__.py
+│   │   └── download_dataset.py       # Dataset download and enrichment script
+│   ├── features/                     # Feature engineering
+│   │   ├── __init__.py
+│   │   └── feature_engineering.py    # Feature creation and transformation
+│   └── __init__.py
+├── models/                           # Saved trained models
+│   ├── linear_regression.pkl         # Linear regression model
+│   ├── random_forest.pkl             # Random forest model
+│   ├── xgboost.pkl                   # XGBoost model
+│   ├── simple_nn.pth                 # Simple neural network
+│   ├── deep_nn.pth                   # Deep neural network
+│   ├── multitask_nn.pth              # Multi-task neural network
+│   ├── scaler.pkl                    # Feature scaler
+│   ├── scaler_X.pkl                  # Input features scaler
+│   ├── scaler_y_str.pkl              # Strength target scaler
+│   └── scaler_y_circ.pkl             # Circularity target scaler
 ├── docs/
-│   ├── PRD.md           # Product Requirements Document
-│   ├── technical_spec.md
-│   └── learning_journal.md
-├── webapp/
-│   ├── backend/         # FastAPI application
-│   └── frontend/        # React application
-├── tests/
-├── requirements.txt
-└── README.md
+│   └── PRD.md                        # Product Requirements Document
+├── webapp/                           # Web application (future implementation)
+├── requirements.txt                   # Python dependencies
+├── README.md                         # Project documentation
+├── GETTING_STARTED.md                # Setup and installation guide
+└── START_HERE.md                     # Quick start guide
 ```
 
 ## Getting Started
@@ -208,7 +221,7 @@ This project is for educational and portfolio purposes. Dataset used under CC BY
 
 ## Author
 
-**[Your Name]**
+**Raka Adrianto** [LinkedIn](https://www.linkedin.com/in/lugasraka/)
 - Sustainability Program Manager @ Siemens
 - Passionate about AI/ML for Climate Impact
 - Preparing for Portfolio Lead roles in AI for Sustainability
