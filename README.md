@@ -187,23 +187,6 @@ jupyter notebook notebooks/01_data_exploration.ipynb
    - Key insights and breakthroughs
    - Resources and references
 
-4. **Impact Assessment**
-   - Environmental impact calculations
-   - Stakeholder interview insights
-   - Partnership opportunities
-   - Business model exploration
-
-## Alignment with Google DeepMind Impact Roles
-
-This project demonstrates key competencies for the Portfolio Lead positions:
-
-- **Real-world AI Application:** Solving circular economy challenges
-- **Program Management:** Multi-phase execution with clear milestones
-- **Stakeholder Engagement:** Understanding manufacturer, architect, recycler needs
-- **Impact Measurement:** Quantifying sustainability outcomes
-- **Technical Bridge:** Translating ML capabilities to domain solutions
-- **Innovation:** Novel approach to automating material passports
-
 ## References & Citations
 
 **Dataset:**
@@ -225,7 +208,3 @@ This project is for educational and portfolio purposes. Dataset used under CC BY
 - Sustainability Program Manager @ Siemens
 - Passionate about AI/ML for Climate Impact
 - Preparing for Portfolio Lead roles in AI for Sustainability
-
----
-
-Built with passion for sustainable construction and circular economy
