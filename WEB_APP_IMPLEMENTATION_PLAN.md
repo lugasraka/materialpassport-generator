@@ -8,9 +8,13 @@ This document outlines the implementation plan for building a web application fo
 
 **Current State:**
 - 6 trained ML models (Linear Regression, Random Forest, XGBoost, Simple NN, Deep NN, Multi-task NN)
+- **Best Production Model:** XGBoost (R²=0.91, RMSE=4.8 MPa)
 - Feature engineering pipeline with sustainability metrics
 - Data processing and validation logic
-- Project phase 1-2 complete (Foundation and Deep Learning)
+- **MLflow Integration:** Complete experiment tracking and model versioning
+- **Production Artifacts:** `production_metadata.json`, `production_features.json` generated
+- **Deployment Pipeline:** `deploy_best_model.py`, `predict.py` scripts ready
+- Project phase 1-2 complete (Foundation and Deep Learning + MLOps)
 
 **Goal:** Build a production-ready web application that transforms the trained models into a user-friendly material passport generation tool.
 
@@ -54,11 +58,13 @@ This document outlines the implementation plan for building a web application fo
 #### Backend
 - **Framework:** FastAPI 0.100.0
 - **Server:** Uvicorn 0.23.1
-- **ML:** PyTorch 2.0.1, scikit-learn 1.3.0
+- **ML:** PyTorch 2.0.1, scikit-learn 1.3.0, XGBoost 2.0.0
 - **Validation:** Pydantic 2.1.1
 - **QR Code:** qrcode 7.4.2
 - **PDF Generation:** reportlab 4.0.7
 - **File Upload:** python-multipart 0.0.6
+- **MLOps:** MLflow 2.10.0 (production logging and tracking)
+- **Model Serving:** Load from existing `models/` directory with production artifacts
 
 #### Frontend
 - **Framework:** Next.js 14 (App Router)
@@ -83,39 +89,45 @@ This document outlines the implementation plan for building a web application fo
 ### 1.1 Project Structure
 
 ```
-webapp/backend/
-├── main.py                      # FastAPI application entry point
-├── requirements.txt             # Python dependencies
-├── README.md                   # Backend documentation
-├── .env                        # Environment variables (not committed)
-│
-├── models/
-│   ├── __init__.py
-│   ├── loader.py               # Model loading logic
-│   └── predictor.py            # Prediction logic
-│
-├── api/
-│   ├── __init__.py
-│   ├── routes.py               # API route definitions
-│   └── schemas.py              # Pydantic models for validation
-│
-├── services/
-│   ├── __init__.py
-│   ├── prediction_service.py   # ML prediction logic
-│   ├── sustainability_service.py  # Sustainability calculations
-│   └── passport_service.py     # Passport generation logic
-│
-├── utils/
-│   ├── __init__.py
-│   ├── qr_generator.py         # QR code generation
-│   ├── pdf_generator.py        # PDF export functionality
-│   └── config.py               # Configuration management
-│
-└── tests/                      # Unit tests
-    ├── __init__.py
-    ├── test_routes.py
-    ├── test_services.py
-    └── test_utils.py
+ webapp/backend/
+ ├── main.py                      # FastAPI application entry point
+ ├── requirements.txt             # Python dependencies
+ ├── README.md                   # Backend documentation
+ ├── .env                        # Environment variables (not committed)
+ ├── .env.example                # Environment variable template
+ │
+ ├── models/
+ │   ├── __init__.py
+ │   ├── loader.py               # Model loading logic (from ../models/)
+ │   └── predictor.py            # Prediction logic
+ │
+ ├── api/
+ │   ├── __init__.py
+ │   ├── routes.py               # API route definitions
+ │   └── schemas.py              # Pydantic models for validation
+ │
+ ├── services/
+ │   ├── __init__.py
+ │   ├── prediction_service.py   # ML prediction logic
+ │   ├── sustainability_service.py  # Sustainability calculations
+ │   ├── passport_service.py     # Passport generation logic
+ │   └── mlflow_service.py     # MLflow production logging
+ │
+ ├── utils/
+ │   ├── __init__.py
+ │   ├── qr_generator.py         # QR code generation
+ │   ├── pdf_generator.py        # PDF export functionality
+ │   ├── config.py               # Configuration management
+ │   └── feature_utils.py       # Feature engineering utilities
+ │
+ ├── tests/                      # Unit tests
+ │   ├── __init__.py
+ │   ├── test_routes.py
+ │   ├── test_services.py
+ │   └── test_utils.py
+ │
+ └── mlflow/
+     └── config.py               # MLflow tracking configuration
 ```
 
 ### 1.2 API Endpoints
@@ -205,64 +217,79 @@ List all available prediction models.
 **Response:**
 ```json
 {
-  "models": [
-    {
-      "name": "linear_regression",
-      "type": "regression",
-      "description": "Linear Regression model for compressive strength",
-      "performance": {
-        "r2": 0.82,
-        "rmse": 6.5
-      }
-    },
-    {
-      "name": "random_forest",
-      "type": "regression",
-      "description": "Random Forest ensemble model",
-      "performance": {
-        "r2": 0.91,
-        "rmse": 4.2
-      }
-    },
-    {
-      "name": "xgboost",
-      "type": "regression",
-      "description": "Gradient Boosted Trees (best performance)",
-      "performance": {
-        "r2": 0.94,
-        "rmse": 3.1
-      }
-    },
-    {
-      "name": "simple_nn",
-      "type": "neural_network",
-      "description": "Simple Feedforward Neural Network",
-      "performance": {
-        "r2": 0.89,
-        "rmse": 4.8
-      }
-    },
-    {
-      "name": "deep_nn",
-      "type": "neural_network",
-      "description": "Deep Neural Network with more layers",
-      "performance": {
-        "r2": 0.92,
-        "rmse": 3.5
-      }
-    },
-    {
-      "name": "multitask_nn",
-      "type": "neural_network",
-      "description": "Multi-task learning (strength + recyclability)",
-      "performance": {
-        "strength_r2": 0.90,
-        "recyclability_accuracy": 0.87
-      }
-    }
-  ]
+   "models": [
+     {
+       "name": "linear_regression",
+       "type": "regression",
+       "description": "Linear Regression model for compressive strength",
+       "performance": {
+         "r2": 0.6276,
+         "rmse": 9.80,
+         "mae": 7.75
+       },
+       "features": "8 original"
+     },
+     {
+       "name": "random_forest",
+       "type": "regression",
+       "description": "Random Forest ensemble model",
+       "performance": {
+         "r2": 0.8793,
+         "rmse": 5.58,
+         "mae": 3.99
+       },
+       "features": "8 original"
+     },
+     {
+       "name": "xgboost",
+       "type": "regression",
+       "description": "🏆 BEST MODEL - Gradient Boosted Trees (Optimized)",
+       "performance": {
+         "r2": 0.9353,
+         "rmse": 4.08,
+         "mae": 2.82
+       },
+       "features": "16 aggregate (optimized)",
+       "best_for_production": true
+     },
+     {
+       "name": "simple_nn",
+       "type": "neural_network",
+       "description": "Simple Feedforward Neural Network",
+       "performance": {
+         "r2": 0.8625,
+         "rmse": 5.95,
+         "mae": 4.18
+       },
+       "features": "8 original"
+     },
+     {
+       "name": "deep_nn",
+       "type": "neural_network",
+       "description": "Deep Neural Network with more layers",
+       "performance": {
+         "r2": 0.8565,
+         "rmse": 6.08,
+         "mae": 4.27
+       },
+       "features": "8 original"
+     },
+     {
+       "name": "multitask_nn",
+       "type": "neural_network",
+       "description": "Multi-task learning (strength + recyclability)",
+       "performance": {
+         "strength_r2": 0.8667,
+         "strength_rmse": 5.86,
+         "recyclability_accuracy": 0.87
+       },
+       "features": "8 original"
+     }
+   ]
 }
 ```
+
+**Note:** Performance metrics from `docs/OPTIMIZATION_SUMMARY.md`. XGBoost with aggregate features achieved R²=0.9353, RMSE=4.08 MPa (meets primary target: R²>0.92, RMSE<4.5 MPa).
 
 **POST `/api/v1/predict`**
 Raw prediction endpoint for developers.
@@ -275,76 +302,237 @@ Health check endpoint for monitoring.
 #### models/loader.py
 ```python
 """
-Load all trained ML models on application startup.
+Load all trained ML models on application startup using production artifacts.
 """
 class ModelLoader:
     def __init__(self):
         self.models = {}
         self.scalers = {}
+        self.production_metadata = None
+        self.production_features = None
 
     def load_all_models(self):
         """Load all 6 trained models from ../models/ directory"""
+        import json
+        import joblib
+        import torch
+        from pathlib import Path
+
+        models_dir = Path("../../models")
+
+        # Load production metadata
+        with open(models_dir / "production_metadata.json", "r") as f:
+            self.production_metadata = json.load(f)
+
+        # Load production features schema
+        with open(models_dir / "production_features.json", "r") as f:
+            self.production_features = json.load(f)
+
         # Load Linear Regression
+        self.models["linear_regression"] = joblib.load(models_dir / "linear_regression.pkl")
+
         # Load Random Forest
-        # Load XGBoost
+        self.models["random_forest"] = joblib.load(models_dir / "random_forest.pkl")
+
+        # Load XGBoost (best model - default)
+        self.models["xgboost"] = joblib.load(models_dir / "xgboost.pkl")
+
         # Load Simple NN
+        self.models["simple_nn"] = torch.load(models_dir / "simple_nn.pth")
+
         # Load Deep NN
+        self.models["deep_nn"] = torch.load(models_dir / "deep_nn.pth")
+
         # Load Multi-task NN
+        self.models["multitask_nn"] = torch.load(models_dir / "multitask_nn.pth")
+
         # Load scalers
-        pass
+        self.scalers["X"] = joblib.load(models_dir / "scaler_X.pkl")
+        self.scalers["y_str"] = joblib.load(models_dir / "scaler_y_str.pkl")
+        self.scalers["y_circ"] = joblib.load(models_dir / "scaler_y_circ.pkl")
 
     def get_model(self, model_name: str):
         """Return specific model by name"""
-        pass
+        return self.models.get(model_name)
+
+    def get_best_model(self):
+        """Return the best performing model (XGBoost)"""
+        return self.models.get("xgboost")
+
+    def get_model_metadata(self, model_name: str):
+        """Return metadata for a specific model"""
+        return self.production_metadata.get(model_name)
 ```
 
 #### services/prediction_service.py
 ```python
 """
-Handle ML predictions using loaded models.
+Handle ML predictions using loaded models with MLflow logging.
 """
-class PredictionService:
-    def __init__(self, model_loader: ModelLoader):
-        self.model_loader = model_loader
+import numpy as np
+from typing import Dict, Optional
+import mlflow
+import mlflow.pytorch
+import mlflow.sklearn
 
-    def predict_strength(self, composition: dict, model_name: str):
+class PredictionService:
+    def __init__(self, model_loader: ModelLoader, mlflow_service=None):
+        self.model_loader = model_loader
+        self.mlflow_service = mlflow_service
+
+    def predict_strength(self, composition: dict, model_name: str = "xgboost"):
         """Predict compressive strength"""
         # Preprocess input
-        # Scale features
+        features = self._preprocess_input(composition)
+
+        # Scale features using scaler_X
+        features_scaled = self.model_loader.scalers["X"].transform([features])
+
+        # Get model
+        model = self.model_loader.get_model(model_name) or self.model_loader.get_best_model()
+
         # Run prediction
-        # Postprocess output
-        pass
+        prediction = model.predict(features_scaled)[0]
+
+        # Log prediction to MLflow production
+        if self.mlflow_service:
+            self.mlflow_service.log_prediction(
+                model_name=model_name,
+                input_features=composition,
+                prediction=prediction,
+                prediction_type="strength"
+            )
+
+        return {
+            "value": float(prediction),
+            "unit": "MPa",
+            "model": model_name,
+            "confidence": self._get_confidence(model_name)
+        }
 
     def predict_recyclability(self, composition: dict):
         """Predict recyclability score"""
-        pass
+        # Preprocess input
+        features = self._preprocess_input(composition)
+        features_scaled = self.model_loader.scalers["X"].transform([features])
 
-    def get_model_comparison(self, composition: dict):
-        """Compare predictions from all models"""
-        pass
+        # Use multi-task NN for recyclability prediction
+        model = self.model_loader.get_model("multitask_nn")
+        model.eval()
+
+        with torch.no_grad():
+            prediction = model(torch.tensor(features_scaled, dtype=torch.float32))
+
+        # Log prediction to MLflow
+        if self.mlflow_service:
+            self.mlflow_service.log_prediction(
+                model_name="multitask_nn",
+                input_features=composition,
+                prediction=prediction.numpy()[0][1],  # Recyclability is second output
+                prediction_type="recyclability"
+            )
+
+        score = int(prediction.numpy()[0][1] * 100)  # Scale to 0-100
+        grade = self._calculate_grade(score)
+
+        return {"score": score, "grade": grade, "model": "multitask_nn"}
+
+    def _preprocess_input(self, composition: dict) -> list:
+        """Convert composition dict to feature array"""
+        feature_order = [
+            "cement", "blast_furnace_slag", "fly_ash",
+            "water", "superplasticizer", "coarse_aggregate",
+            "fine_aggregate", "age"
+        ]
+        return [composition[feat] for feat in feature_order]
+
+    def _get_confidence(self, model_name: str) -> float:
+        """Get confidence score based on model metadata"""
+        metadata = self.model_loader.get_model_metadata(model_name)
+        # Use R² as proxy for confidence
+        return metadata.get("test_r2", 0.85)
+
+    def _calculate_grade(self, score: int) -> str:
+        """Calculate sustainability grade"""
+        if score >= 80: return "A"
+        elif score >= 60: return "B"
+        elif score >= 40: return "C"
+        else: return "D"
 ```
 
 #### services/sustainability_service.py
 ```python
 """
 Calculate sustainability metrics from material composition.
+Reuses logic from src/features/feature_engineering.py
 """
+from typing import Dict
+
 class SustainabilityService:
-    def calculate_circularity_score(self, composition: dict) -> int:
-        """Calculate 0-100 circularity score"""
-        pass
+    def __init__(self):
+        # CO2 emission factors (kg CO2 per kg of material)
+        self.co2_factors = {
+            "cement": 0.825,
+            "blast_furnace_slag": 0.027,
+            "fly_ash": 0.012,
+            "water": 0.0,
+            "superplasticizer": 0.5,
+            "coarse_aggregate": 0.004,
+            "fine_aggregate": 0.004
+        }
+
+    def calculate_circularity_score(self, composition: dict, recycled_materials: list) -> int:
+        """Calculate 0-100 circularity score based on recycled content"""
+        total_mass = sum(composition.values())
+        recycled_mass = sum([composition[mat] for mat in recycled_materials if mat in composition])
+
+        recycled_percentage = (recycled_mass / total_mass) * 100
+
+        # Circularity formula: weighted average of recycled content and efficiency
+        circularity = min(100, int(recycled_percentage * 1.2))  # Bonus for using recycled materials
+
+        return circularity
 
     def estimate_co2_emissions(self, composition: dict) -> float:
         """Estimate CO2 emissions in kg/m³"""
-        pass
+        total_co2 = sum(
+            self.co2_factors.get(mat, 0) * amount
+            for mat, amount in composition.items()
+        )
+        return round(total_co2, 2)
 
     def calculate_recycled_content(self, composition: dict) -> dict:
         """Calculate percentage and types of recycled content"""
-        pass
+        recycled_materials = ["blast_furnace_slag", "fly_ash"]
+        total_mass = sum(composition.values())
+        recycled_mass = sum([composition[mat] for mat in recycled_materials if mat in composition])
+
+        percentage = round((recycled_mass / total_mass) * 100, 1) if total_mass > 0 else 0
+
+        materials_used = []
+        if composition.get("blast_furnace_slag", 0) > 0:
+            materials_used.append("Blast Furnace Slag")
+        if composition.get("fly_ash", 0) > 0:
+            materials_used.append("Fly Ash")
+
+        return {"percentage": percentage, "materials": materials_used}
 
     def assign_sustainability_grade(self, metrics: dict) -> str:
-        """Assign A-F grade based on metrics"""
-        pass
+        """Assign A-F grade based on circularity and CO2"""
+        circularity = metrics.get("circularity_score", 0)
+        co2_emissions = metrics.get("co2_emissions", 1000)
+
+        # Grading rubric
+        if circularity >= 70 and co2_emissions < 350:
+            return "A (Excellent)"
+        elif circularity >= 50 and co2_emissions < 400:
+            return "B (Good)"
+        elif circularity >= 30 and co2_emissions < 500:
+            return "C (Fair)"
+        elif circularity >= 15:
+            return "D (Poor)"
+        else:
+            return "F (Very Poor)"
 ```
 
 #### services/passport_service.py
@@ -352,6 +540,10 @@ class SustainabilityService:
 """
 Generate complete material passports.
 """
+from datetime import datetime
+from uuid import uuid4
+from typing import Dict, Optional
+
 class PassportService:
     def __init__(
         self,
@@ -360,19 +552,115 @@ class PassportService:
     ):
         self.prediction_service = prediction_service
         self.sustainability_service = sustainability_service
+        self.passports = {}  # In-memory storage for MVP
 
-    def generate_passport(self, composition: dict, model_name: str) -> dict:
+    def generate_passport(self, composition: dict, model_name: str = "xgboost") -> dict:
         """Generate complete material passport"""
         # Get predictions
-        # Calculate sustainability metrics
-        # Generate passport ID
-        # Create passport data structure
-        # Store in database (optional, in-memory for MVP)
-        pass
+        strength_prediction = self.prediction_service.predict_strength(
+            composition, model_name
+        )
+        recyclability_prediction = self.prediction_service.predict_recyclability(
+            composition
+        )
 
-    def get_passport(self, passport_id: str) -> dict:
+        # Calculate sustainability metrics
+        recycled_content = self.sustainability_service.calculate_recycled_content(composition)
+        circularity_score = self.sustainability_service.calculate_circularity_score(
+            composition, recycled_content["materials"]
+        )
+        co2_emissions = self.sustainability_service.estimate_co2_emissions(composition)
+        sustainability_grade = self.sustainability_service.assign_sustainability_grade({
+            "circularity_score": circularity_score,
+            "co2_emissions": co2_emissions
+        })
+
+        # Generate passport ID
+        passport_id = str(uuid4())
+
+        # Create passport data structure
+        passport = {
+            "id": passport_id,
+            "material_type": "Concrete",
+            "composition": composition,
+            "predictions": {
+                "compressive_strength": strength_prediction,
+                "recyclability": recyclability_prediction
+            },
+            "sustainability_metrics": {
+                "circularity_score": circularity_score,
+                "co2_emissions": {
+                    "value": co2_emissions,
+                    "unit": "kg CO2/m³"
+                },
+                "recycled_content": recycled_content,
+                "sustainability_grade": sustainability_grade
+            },
+            "certification": "Circular Economy Compliant",
+            "generated_at": datetime.utcnow().isoformat() + "Z",
+            "qr_code_url": f"/api/v1/passport/{passport_id}/qr"
+        }
+
+        # Store in database (in-memory for MVP)
+        self.passports[passport_id] = passport
+
+        return passport
+
+    def get_passport(self, passport_id: str) -> Optional[Dict]:
         """Retrieve stored passport"""
-        pass
+        return self.passports.get(passport_id)
+ ```
+
+#### services/mlflow_service.py
+```python
+"""
+MLflow production logging service.
+Integrates with existing MLflow configuration from src/mlflow_config.py
+"""
+import mlflow
+from typing import Dict, Any
+
+class MLflowService:
+    def __init__(self, experiment_name: str = "material-passport-production"):
+        """Initialize MLflow service for production logging"""
+        self.experiment_name = experiment_name
+
+        # Set MLflow tracking URI (can be configured via environment)
+        tracking_uri = mlflow.get_tracking_uri()
+        mlflow.set_experiment(experiment_name)
+
+    def log_prediction(self, model_name: str, input_features: Dict,
+                      prediction: Any, prediction_type: str):
+        """Log a prediction to MLflow for production monitoring"""
+        with mlflow.start_run(run_name=f"{model_name}_{prediction_type}_prod"):
+            # Log input features
+            for feature_name, value in input_features.items():
+                mlflow.log_param(f"input_{feature_name}", value)
+
+            # Log model info
+            mlflow.log_param("model_name", model_name)
+            mlflow.log_param("prediction_type", prediction_type)
+
+            # Log prediction output
+            if isinstance(prediction, (int, float)):
+                mlflow.log_metric("prediction_value", prediction)
+            elif isinstance(prediction, (list, dict)):
+                mlflow.log_dict(prediction)
+
+    def log_model_performance(self, model_name: str, metrics: Dict[str, float]):
+        """Log performance metrics for production models"""
+        with mlflow.start_run(run_name=f"{model_name}_performance"):
+            mlflow.log_params({"model_name": model_name})
+            mlflow.log_metrics(metrics)
+
+    def log_error(self, model_name: str, error_type: str, error_message: str):
+        """Log prediction errors for monitoring"""
+        with mlflow.start_run(run_name=f"{model_name}_error"):
+            mlflow.log_params({
+                "model_name": model_name,
+                "error_type": error_type
+            })
+            mlflow.set_tag("error", error_message)
 ```
 
 #### utils/qr_generator.py
@@ -843,11 +1131,28 @@ services:
 
 **Update `requirements.txt`:**
 ```txt
-# Add these new dependencies
+# Core dependencies from existing project
+pandas>=2.0.0
+numpy>=1.24.0
+scikit-learn>=1.3.0
+torch>=2.0.1
+xgboost>=2.0.0
+joblib>=1.3.0
+
+# Web framework dependencies
+fastapi>=0.100.0
+uvicorn[standard]>=0.23.1
+pydantic>=2.1.1
+pydantic-settings>=2.1.0
+python-multipart>=0.0.6
+
+# MLOps dependencies (already in main requirements.txt)
+mlflow>=2.10.0
+
+# Utility dependencies
 qrcode>=7.4.2
 reportlab>=4.0.7
-python-multipart>=0.0.6
-pydantic-settings>=2.1.0
+pillow>=10.0.0
 ```
 
 **Create `.env.example`:**
@@ -1164,30 +1469,38 @@ async def generate_batch_passports(
 
 **Days 1-2: Setup & Model Loading**
 - Set up FastAPI project structure
-- Implement model loader
-- Test loading all 6 models
+- Implement model loader with production artifacts (`production_metadata.json`, `production_features.json`)
+- Load all 6 models from existing `models/` directory
+- Test model loading with XGBoost (best model) as default
 - Write unit tests for model loader
+- Configure MLflow for production logging
 
 **Days 3-4: Core Services**
-- Implement prediction service
-- Implement sustainability service
-- Implement passport service
-- Write unit tests
+- Implement prediction service (reusing logic from `predict.py`)
+- Implement sustainability service (reusing logic from `src/features/feature_engineering.py`)
+- Implement MLflow logging service for production monitoring
+- Implement passport service orchestrating predictions + sustainability
+- Write unit tests for all services
 
 **Days 5-7: API Endpoints & Utils**
-- Implement all API endpoints
-- Add request/response validation
+- Implement all API endpoints from plan
+- Add request/response validation with Pydantic
 - Implement QR code generator
 - Implement PDF generator
-- Add CORS configuration
+- Add CORS configuration for frontend
+- Integrate MLflow logging into prediction endpoints
 - Test all endpoints locally
 - Write integration tests
+- Verify MLflow production runs are logged
 
 **Week 1 Deliverables:**
-- Working FastAPI backend
-- All API endpoints functional
+- Working FastAPI backend with MLflow integration
+- All API endpoints functional and logged to MLflow
+- All 6 models loaded and accessible via API
+- Production artifacts integrated (metadata, features)
 - Unit tests for core services
-- API documentation (Swagger)
+- API documentation (Swagger) available at `/docs`
+- MLflow production tracking operational
 
 ### Week 2: Frontend Development
 
