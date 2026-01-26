@@ -6,7 +6,6 @@ FastAPI backend for serving ML models and generating material passports.
 import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from contextlib import asynccontextmanager
 
 from .models.loader import ModelLoader
 from .services.prediction_service import PredictionService
@@ -15,7 +14,6 @@ from .services.passport_service import PassportService
 from .services.mlflow_service import MLflowService
 from .api.routes import router as api_router
 from .utils.config import Settings, get_settings
-import os
 
 # Initialize FastAPI
 app = FastAPI(
@@ -33,17 +31,15 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-)
-
 # Include API routes
 app.include_router(api_router, prefix=Settings().api_prefix)
 
 # Global services (will be initialized on startup)
-model_loader: ModelLoader = None
-prediction_service: PredictionService = None
-sustainability_service: SustainabilityService = None
-passport_service: PassportService = None
-mlflow_service: MLflowService = None
+model_loader = None
+prediction_service = None
+sustainability_service = None
+passport_service = None
+mlflow_service = None
 
 
 @app.on_event("startup")
@@ -95,11 +91,11 @@ async def startup_event():
         # Set global services for API routes
         from .api import routes
         routes.init_services(
-            model_loader=model_loader,
-            prediction_service=prediction_service,
-            sustainability_service=sustainability_service,
-            passport_service=passport_service,
-            mlflow_service=mlflow_service
+            loader=model_loader,
+            pred_svc=prediction_service,
+            sust_svc=sustainability_service,
+            pass_svc=passport_service,
+            mlflow_svc=mlflow_service
         )
         
         print("=" * 60)
