@@ -3,7 +3,7 @@ API route definitions for Material Passport Generator.
 """
 from fastapi import APIRouter, HTTPException, status
 from fastapi.responses import StreamingResponse, JSONResponse
-from typing import Dict
+from typing import Dict, Optional
 from datetime import datetime
 from uuid import uuid4
 
@@ -11,13 +11,6 @@ from .schemas import (
     PredictionRequest, Passport, ModelsResponse, HealthResponse,
     ModelInfo, PredictionRequest
 )
-from ..services.prediction_service import PredictionService
-from ..services.sustainability_service import SustainabilityService
-from ..services.passport_service import PassportService
-from ..services.mlflow_service import MLflowService
-from ..models.loader import ModelLoader
-from ..utils.qr_generator import generate_qr_code
-from ..utils.pdf_generator import generate_passport_pdf
 
 router = APIRouter(prefix="/api/v1", tags=["passport"])
 

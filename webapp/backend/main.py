@@ -3,17 +3,22 @@ Material Passport Generator API
 
 FastAPI backend for serving ML models and generating material passports.
 """
+import sys
+from pathlib import Path
 import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from .models.loader import ModelLoader
-from .services.prediction_service import PredictionService
-from .services.sustainability_service import SustainabilityService
-from .services.passport_service import PassportService
-from .services.mlflow_service import MLflowService
-from .api.routes import router as api_router
-from .utils.config import Settings, get_settings
+# Add parent directory to path for absolute imports
+sys.path.insert(0, str(Path(__file__).parent))
+
+from models.loader import ModelLoader
+from services.prediction_service import PredictionService
+from services.sustainability_service import SustainabilityService
+from services.passport_service import PassportService
+from services.mlflow_service import MLflowService
+from api.routes import router as api_router
+from utils.config import Settings, get_settings
 
 # Initialize FastAPI
 app = FastAPI(
@@ -33,13 +38,6 @@ app.add_middleware(
 
 # Include API routes
 app.include_router(api_router, prefix=Settings().api_prefix)
-
-# Global services (will be initialized on startup)
-model_loader = None
-prediction_service = None
-sustainability_service = None
-passport_service = None
-mlflow_service = None
 
 
 @app.on_event("startup")
@@ -89,7 +87,7 @@ async def startup_event():
         print("✓ Passport service initialized")
         
         # Set global services for API routes
-        from .api import routes
+        import api.routes as routes
         routes.init_services(
             loader=model_loader,
             pred_svc=prediction_service,
@@ -125,8 +123,7 @@ async def root():
             "models": f"{settings.api_prefix}/models",
             "docs": f"{settings.api_prefix}/docs"
         },
-        "models_loaded": len(model_loader.get_available_models()) if model_loader else 0,
-        "mlflow_enabled": settings.mlflow_enabled
+        "message": "Backend API is running. Use Swagger UI at /api/v1/docs for interactive testing."
     }
 
 
