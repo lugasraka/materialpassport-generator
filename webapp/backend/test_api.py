@@ -98,14 +98,14 @@ try:
         
         passport_id = passport['id']
         print(f"\nPassport URL: {BASE_URL}/api/v1/passport/{passport_id}")
-        
-        # Save passport_id for subsequent tests
     else:
         print(f"✗ Failed: HTTP {response.status_code}")
         print(f"  Response: {response.text}")
-        
+        passport_id = None
+
 except Exception as e:
     print(f"✗ Failed: {e}")
+    passport_id = None
 
 # Test 4: Retrieve Passport (if passport was generated)
 print("\n[Test 4] Retrieve Passport by ID")
