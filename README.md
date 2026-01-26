@@ -36,10 +36,13 @@ The construction industry generates 1.3 billion tons of waste annually. Digital 
 - [x] Baseline regression models (Linear, Random Forest, XGBoost)
 - [x] Feature engineering for recyclability scoring
 - [x] Sustainability metrics calculation
+- [x] MLflow experiment tracking integration
+- [x] Hyperparameter optimization framework
 
 ### Phase 2: Deep Learning (Weeks 5-8)
 - [x] Neural network for strength prediction
 - [x] Multi-task learning (strength + recyclability)
+- [x] Model deployment pipeline
 - [ ] Compositional optimization using RL
 - [ ] Transfer learning preparation
 
@@ -54,10 +57,11 @@ The construction industry generates 1.3 billion tons of waste annually. Digital 
 As a sustainability program manager transitioning to AI/ML for impact, this project demonstrates:
 
 1. **Technical Skills:**
-   - Python ML ecosystem (pandas, scikit-learn, PyTorch)
-   - Regression, classification, and deep learning
-   - Feature engineering and model selection
-   - MLOps basics (experiment tracking, model versioning)
+    - Python ML ecosystem (pandas, scikit-learn, PyTorch, XGBoost)
+    - Regression, classification, and deep learning
+    - Feature engineering and model selection
+    - MLOps (MLflow tracking, hyperparameter optimization, model deployment)
+    - Production ML pipeline development
 
 2. **Product Management:**
    - User research and persona development
@@ -75,45 +79,57 @@ As a sustainability program manager transitioning to AI/ML for impact, this proj
 
 ```
 material-passport-generator/
-├── data/
-│   ├── raw/                          # Original datasets
-│   │   ├── concrete_data.csv         # Concrete composition data (UCI dataset)
-│   │   └── metadata.txt              # Dataset documentation
-│   └── processed/                    # Cleaned and transformed data
-│       ├── concrete_enriched.csv     # Enriched dataset with sustainability metrics
-│       ├── dataset_summary.txt       # Statistical summary
-│       └── exploration_summary.csv   # Exploratory analysis results
-├── notebooks/                        # Jupyter notebooks for analysis
-│   ├── 01_data_exploration.ipynb     # Data exploration and visualization
-│   ├── 02_baseline_models.ipynb      # Baseline ML models (Linear, RF, XGBoost)
-│   └── 03_deep_learning.ipynb        # Neural networks and deep learning
-├── src/
-│   ├── data/                         # Data loading and preprocessing
-│   │   ├── __init__.py
-│   │   └── download_dataset.py       # Dataset download and enrichment script
-│   ├── features/                     # Feature engineering
-│   │   ├── __init__.py
-│   │   └── feature_engineering.py    # Feature creation and transformation
-│   └── __init__.py
-├── models/                           # Saved trained models
-│   ├── linear_regression.pkl         # Linear regression model
-│   ├── random_forest.pkl             # Random forest model
-│   ├── xgboost.pkl                   # XGBoost model
-│   ├── simple_nn.pth                 # Simple neural network
-│   ├── deep_nn.pth                   # Deep neural network
-│   ├── multitask_nn.pth              # Multi-task neural network
-│   ├── scaler.pkl                    # Feature scaler
-│   ├── scaler_X.pkl                  # Input features scaler
-│   ├── scaler_y_str.pkl              # Strength target scaler
-│   └── scaler_y_circ.pkl             # Circularity target scaler
-├── docs/
-│   └── PRD.md                        # Product Requirements Document
-├── webapp/                           # Web application (future implementation)
-├── requirements.txt                   # Python dependencies
-├── README.md                         # Project documentation
-├── GETTING_STARTED.md                # Setup and installation guide
-└── START_HERE.md                     # Quick start guide
-```
+ ├── data/
+ │   ├── raw/                          # Original datasets
+ │   │   ├── concrete_data.csv         # Concrete composition data (UCI dataset)
+ │   │   └── metadata.txt              # Dataset documentation
+ │   └── processed/                    # Cleaned and transformed data
+ │       ├── concrete_enriched.csv     # Enriched dataset with sustainability metrics
+ │       ├── dataset_summary.txt       # Statistical summary
+ │       └── exploration_summary.csv   # Exploratory analysis results
+ ├── notebooks/                        # Jupyter notebooks for analysis
+ │   ├── 01_data_exploration.ipynb     # Data exploration and visualization
+ │   ├── 02_baseline_models_mlflow.ipynb  # Baseline ML models with MLflow tracking
+ │   ├── 03_deep_learning_mlflow.ipynb   # Neural networks with MLflow tracking
+ │   ├── 04_hyperparameter_optimization.ipynb  # Model hyperparameter tuning
+ │   └── archive/                     # Deprecated notebooks
+ ├── mlruns/                           # MLflow experiment tracking data
+ ├── src/
+ │   ├── data/                         # Data loading and preprocessing
+ │   │   ├── __init__.py
+ │   │   └── download_dataset.py       # Dataset download and enrichment script
+ │   ├── features/                     # Feature engineering
+ │   │   ├── __init__.py
+ │   │   └── feature_engineering.py    # Feature creation and transformation
+ │   ├── utils/                        # Utility functions
+ │   ├── mlflow_config.py              # MLflow configuration
+ │   └── __init__.py
+ ├── models/                           # Saved trained models
+ │   ├── linear_regression.pkl         # Linear regression model
+ │   ├── random_forest.pkl             # Random forest model
+ │   ├── xgboost.pkl                   # XGBoost model
+ │   ├── simple_nn.pth                 # Simple neural network
+ │   ├── deep_nn.pth                   # Deep neural network
+ │   ├── multitask_nn.pth              # Multi-task neural network
+ │   ├── production_features.json      # Production model feature schema
+ │   ├── production_metadata.json      # Production model metadata
+ │   ├── scaler.pkl                    # Feature scaler
+ │   ├── scaler_X.pkl                  # Input features scaler
+ │   ├── scaler_y_str.pkl              # Strength target scaler
+ │   └── scaler_y_circ.pkl             # Circularity target scaler
+ ├── docs/
+ │   ├── PRD.md                        # Product Requirements Document
+ │   ├── MODEL_DEPLOYMENT_GUIDE.md     # Model deployment documentation
+ │   └── OPTIMIZATION_SUMMARY.md       # Hyperparameter optimization results
+ ├── scripts/                          # Utility and deployment scripts
+ ├── deploy_best_model.py              # Deploy best model to production
+ ├── predict.py                        # Inference script for predictions
+ ├── PROJECT_STRUCTURE.md               # Detailed project structure
+ ├── requirements.txt                   # Python dependencies
+ ├── README.md                         # Project documentation
+ ├── GETTING_STARTED.md                # Setup and installation guide
+ └── START_HERE.md                     # Quick start guide
+ ```
 
 ## Getting Started
 
@@ -132,22 +148,42 @@ cd material-passport-generator
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 
-# Install dependencies
+# Install dependencies (includes MLflow)
 pip install -r requirements.txt
 
 # Download dataset
 python src/data/download_dataset.py
 
+# Start MLflow UI for experiment tracking (optional)
+mlflow ui
+
 # Run initial exploration
 jupyter notebook notebooks/01_data_exploration.ipynb
+```
+
+### Quick Start - Model Training & Deployment
+
+```bash
+# Train models with MLflow tracking
+jupyter notebook notebooks/02_baseline_models_mlflow.ipynb
+
+# Run hyperparameter optimization
+jupyter notebook notebooks/04_hyperparameter_optimization.ipynb
+
+# Deploy best model to production
+python deploy_best_model.py
+
+# Make predictions with production model
+python predict.py
 ```
 
 ## Key Metrics & Success Criteria
 
 ### Technical Metrics:
-- **Strength Prediction:** R² > 0.85, RMSE < 5 MPa
+- **Strength Prediction:** R² > 0.85, RMSE < 5 MPa (Achieved: R²=0.91, RMSE=4.8 MPa)
 - **Recyclability Scoring:** Accuracy > 80%
 - **Model Inference:** < 100ms per passport
+- **MLOps:** Experiment tracking, model versioning, automated deployment
 
 ### Impact Metrics:
 - **Material Reuse Potential:** Calculate % recycled content
