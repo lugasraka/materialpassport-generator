@@ -1,0 +1,24 @@
+{
+  "features": [
+    "cement",
+    "water",
+    "superplasticizer",
+    "age",
+    "cement_water",
+    "cement_age",
+    "cement_superplasticizer",
+    "water_age",
+    "water_superplasticizer",
+    "cement_slag",
+    "coarse_fine_aggregate",
+    "water_cement_ratio",
+    "water_binder_ratio",
+    "aggregate_binder_ratio",
+    "cement_age_ratio",
+    "total_binder",
+    "total_aggregate",
+    "total_solid",
+    "paste_volume",
+    "total_volume"
+  ]
+}

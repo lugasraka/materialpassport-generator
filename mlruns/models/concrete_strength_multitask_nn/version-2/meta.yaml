@@ -1,0 +1,15 @@
+creation_timestamp: 1769424425685
+current_stage: None
+deployment_job_state: null
+description: null
+last_updated_timestamp: 1769424425685
+model_id: m-ea4918fa7fc74e46b94d05c02934c2d0
+name: concrete_strength_multitask_nn
+run_id: ddd47dfa91a7404b909d72d932dd850f
+run_link: null
+source: models:/m-ea4918fa7fc74e46b94d05c02934c2d0
+status: READY
+status_message: null
+storage_location: file:C:/Users/z004uhcp/Documents/Side Project/materialpassport-generator/mlruns/309931904079522536/models/m-ea4918fa7fc74e46b94d05c02934c2d0/artifacts
+user_id: null
+version: 2

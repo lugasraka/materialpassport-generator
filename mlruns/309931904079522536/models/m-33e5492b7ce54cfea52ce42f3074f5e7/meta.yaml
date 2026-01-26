@@ -1,0 +1,10 @@
+artifact_location: file:C:/Users/z004uhcp/Documents/Side Project/materialpassport-generator/mlruns/309931904079522536/models/m-33e5492b7ce54cfea52ce42f3074f5e7/artifacts
+creation_timestamp: 1769424157956
+experiment_id: '309931904079522536'
+last_updated_timestamp: 1769424171466
+model_id: m-33e5492b7ce54cfea52ce42f3074f5e7
+model_type: null
+name: scaler_X
+source_run_id: 35f714657ecc496e97f00a47add4bd76
+status: 2
+status_message: null

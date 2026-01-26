@@ -1,0 +1,14 @@
+artifact_uri: file:C:/Users/z004uhcp/Documents/Side Project/materialpassport-generator/mlruns/761842859264032071/75624b7fdb0047fa909c8311dd6005cf/artifacts
+end_time: 1769436916756
+entry_point_name: ''
+experiment_id: '761842859264032071'
+lifecycle_stage: active
+run_id: 75624b7fdb0047fa909c8311dd6005cf
+run_name: xgboost_aggregate_features_optuna_best
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1769436916612
+status: 4
+tags: []
+user_id: z004uhcp

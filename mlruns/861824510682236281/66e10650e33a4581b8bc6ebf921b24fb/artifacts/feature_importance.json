@@ -1,0 +1,14 @@
+[
+  {
+    "feature": "cement",
+    "importance": 0.6680878169936453
+  },
+  {
+    "feature": "water",
+    "importance": 0.25249975845681083
+  },
+  {
+    "feature": "age",
+    "importance": 0.07941242454954393
+  }
+]

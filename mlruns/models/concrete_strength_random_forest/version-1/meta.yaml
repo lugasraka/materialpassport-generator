@@ -1,0 +1,15 @@
+creation_timestamp: 1769423723396
+current_stage: None
+deployment_job_state: null
+description: null
+last_updated_timestamp: 1769423723396
+model_id: m-bed03e5b2f6d4f048ed425139564ed3a
+name: concrete_strength_random_forest
+run_id: c35bc13686bb4ababa1838d845b4519f
+run_link: null
+source: models:/m-bed03e5b2f6d4f048ed425139564ed3a
+status: READY
+status_message: null
+storage_location: file:C:/Users/z004uhcp/Documents/Side Project/materialpassport-generator/mlruns/861824510682236281/models/m-bed03e5b2f6d4f048ed425139564ed3a/artifacts
+user_id: null
+version: 1

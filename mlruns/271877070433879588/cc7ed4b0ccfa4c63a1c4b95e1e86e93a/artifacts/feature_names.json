@@ -1,0 +1,20 @@
+{
+  "features": [
+    "cement",
+    "slag",
+    "fly_ash",
+    "water",
+    "superplasticizer",
+    "coarse_aggregate",
+    "fine_aggregate",
+    "age",
+    "cement_water",
+    "cement_age",
+    "cement_superplasticizer",
+    "water_age",
+    "water_superplasticizer",
+    "cement_slag",
+    "cement_fly_ash",
+    "coarse_fine_aggregate"
+  ]
+}

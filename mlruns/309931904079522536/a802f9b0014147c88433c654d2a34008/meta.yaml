@@ -1,0 +1,14 @@
+artifact_uri: file:C:/Users/z004uhcp/Documents/Side Project/materialpassport-generator/mlruns/309931904079522536/a802f9b0014147c88433c654d2a34008/artifacts
+end_time: 1769424206561
+entry_point_name: ''
+experiment_id: '309931904079522536'
+lifecycle_stage: active
+run_id: a802f9b0014147c88433c654d2a34008
+run_name: deep_nn_baseline
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1769424179674
+status: 3
+tags: []
+user_id: z004uhcp

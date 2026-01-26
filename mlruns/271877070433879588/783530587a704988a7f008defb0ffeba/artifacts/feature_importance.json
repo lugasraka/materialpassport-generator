@@ -1,0 +1,34 @@
+[
+  {
+    "feature": "age",
+    "importance": 0.3958549499511719
+  },
+  {
+    "feature": "cement",
+    "importance": 0.1561446189880371
+  },
+  {
+    "feature": "water",
+    "importance": 0.12666180729866028
+  },
+  {
+    "feature": "fly_ash",
+    "importance": 0.10077023506164551
+  },
+  {
+    "feature": "slag",
+    "importance": 0.07070335745811462
+  },
+  {
+    "feature": "superplasticizer",
+    "importance": 0.06589733064174652
+  },
+  {
+    "feature": "fine_aggregate",
+    "importance": 0.0434977225959301
+  },
+  {
+    "feature": "coarse_aggregate",
+    "importance": 0.04046999663114548
+  }
+]

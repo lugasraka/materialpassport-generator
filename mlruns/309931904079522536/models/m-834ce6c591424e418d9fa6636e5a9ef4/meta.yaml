@@ -1,0 +1,10 @@
+artifact_location: file:C:/Users/z004uhcp/Documents/Side Project/materialpassport-generator/mlruns/309931904079522536/models/m-834ce6c591424e418d9fa6636e5a9ef4/artifacts
+creation_timestamp: 1769424431115
+experiment_id: '309931904079522536'
+last_updated_timestamp: 1769424436445
+model_id: m-834ce6c591424e418d9fa6636e5a9ef4
+model_type: null
+name: scaler_y_strength
+source_run_id: ddd47dfa91a7404b909d72d932dd850f
+status: 2
+status_message: null

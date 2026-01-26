@@ -1,0 +1,178 @@
+[
+  {
+    "feature": "age",
+    "importance": 0.14235526323318481
+  },
+  {
+    "feature": "cement age",
+    "importance": 0.12754011154174805
+  },
+  {
+    "feature": "slag superplasticizer",
+    "importance": 0.09455066919326782
+  },
+  {
+    "feature": "cement superplasticizer",
+    "importance": 0.08298047631978989
+  },
+  {
+    "feature": "cement",
+    "importance": 0.044019538909196854
+  },
+  {
+    "feature": "coarse_aggregate age",
+    "importance": 0.04182051494717598
+  },
+  {
+    "feature": "cement^2",
+    "importance": 0.0347551591694355
+  },
+  {
+    "feature": "slag",
+    "importance": 0.02968761697411537
+  },
+  {
+    "feature": "superplasticizer age",
+    "importance": 0.02953009121119976
+  },
+  {
+    "feature": "slag age",
+    "importance": 0.0253518708050251
+  },
+  {
+    "feature": "water coarse_aggregate",
+    "importance": 0.025305787101387978
+  },
+  {
+    "feature": "cement fine_aggregate",
+    "importance": 0.02414066344499588
+  },
+  {
+    "feature": "cement slag",
+    "importance": 0.022686602547764778
+  },
+  {
+    "feature": "water^2",
+    "importance": 0.019885743036866188
+  },
+  {
+    "feature": "water fine_aggregate",
+    "importance": 0.018387753516435623
+  },
+  {
+    "feature": "water",
+    "importance": 0.018196120858192444
+  },
+  {
+    "feature": "cement coarse_aggregate",
+    "importance": 0.01630849577486515
+  },
+  {
+    "feature": "fly_ash coarse_aggregate",
+    "importance": 0.015075482428073883
+  },
+  {
+    "feature": "slag fly_ash",
+    "importance": 0.014354171231389046
+  },
+  {
+    "feature": "fine_aggregate",
+    "importance": 0.01354618463665247
+  },
+  {
+    "feature": "fly_ash",
+    "importance": 0.012332347221672535
+  },
+  {
+    "feature": "coarse_aggregate fine_aggregate",
+    "importance": 0.011450357735157013
+  },
+  {
+    "feature": "fine_aggregate^2",
+    "importance": 0.010234753601253033
+  },
+  {
+    "feature": "superplasticizer",
+    "importance": 0.00967343058437109
+  },
+  {
+    "feature": "slag fine_aggregate",
+    "importance": 0.009338362142443657
+  },
+  {
+    "feature": "slag water",
+    "importance": 0.009233205579221249
+  },
+  {
+    "feature": "water age",
+    "importance": 0.008623512461781502
+  },
+  {
+    "feature": "fly_ash^2",
+    "importance": 0.008153124712407589
+  },
+  {
+    "feature": "slag coarse_aggregate",
+    "importance": 0.007903487421572208
+  },
+  {
+    "feature": "age^2",
+    "importance": 0.007805639877915382
+  },
+  {
+    "feature": "cement fly_ash",
+    "importance": 0.0071008047088980675
+  },
+  {
+    "feature": "coarse_aggregate^2",
+    "importance": 0.00643838569521904
+  },
+  {
+    "feature": "water superplasticizer",
+    "importance": 0.006261378526687622
+  },
+  {
+    "feature": "cement water",
+    "importance": 0.005091659724712372
+  },
+  {
+    "feature": "coarse_aggregate",
+    "importance": 0.004900507163256407
+  },
+  {
+    "feature": "fine_aggregate age",
+    "importance": 0.004511823877692223
+  },
+  {
+    "feature": "superplasticizer fine_aggregate",
+    "importance": 0.0043695420026779175
+  },
+  {
+    "feature": "slag^2",
+    "importance": 0.0042999861761927605
+  },
+  {
+    "feature": "fly_ash water",
+    "importance": 0.004262255970388651
+  },
+  {
+    "feature": "superplasticizer coarse_aggregate",
+    "importance": 0.004217967391014099
+  },
+  {
+    "feature": "fly_ash age",
+    "importance": 0.004033879842609167
+  },
+  {
+    "feature": "superplasticizer^2",
+    "importance": 0.0033229629043489695
+  },
+  {
+    "feature": "fly_ash superplasticizer",
+    "importance": 0.003059074515476823
+  },
+  {
+    "feature": "fly_ash fine_aggregate",
+    "importance": 0.002903151558712125
+  }
+]

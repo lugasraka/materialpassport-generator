@@ -1,0 +1,23 @@
+artifact_path: file:C:/Users/z004uhcp/Documents/Side Project/materialpassport-generator/mlruns/309931904079522536/models/m-8b8ef7c9540f41f39ed85b03f9e0f2e2/artifacts
+flavors:
+  python_function:
+    config:
+      device: null
+    data: data
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.pytorch
+    pickle_module_name: mlflow.pytorch.pickle_module
+    python_version: 3.13.5
+  pytorch:
+    code: null
+    model_data: data
+    pytorch_version: 2.10.0+cpu
+mlflow_version: 3.8.1
+model_id: m-8b8ef7c9540f41f39ed85b03f9e0f2e2
+model_size_bytes: 62848
+model_uuid: m-8b8ef7c9540f41f39ed85b03f9e0f2e2
+prompts: null
+run_id: a802f9b0014147c88433c654d2a34008
+utc_time_created: '2026-01-26 10:43:07.347067'

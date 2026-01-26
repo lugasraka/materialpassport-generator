@@ -1,0 +1,22 @@
+artifact_path: file:C:/Users/z004uhcp/Documents/Side Project/materialpassport-generator/mlruns/271877070433879588/models/m-ea7db33692ce483c9227c795843872f1/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.13.5
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.8.0
+mlflow_version: 3.8.1
+model_id: m-ea7db33692ce483c9227c795843872f1
+model_size_bytes: 1248901
+model_uuid: m-ea7db33692ce483c9227c795843872f1
+prompts: null
+run_id: cc7ed4b0ccfa4c63a1c4b95e1e86e93a
+utc_time_created: '2026-01-26 14:07:53.618487'

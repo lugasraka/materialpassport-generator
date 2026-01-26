@@ -1,0 +1,15 @@
+creation_timestamp: 1769423731170
+current_stage: None
+deployment_job_state: null
+description: null
+last_updated_timestamp: 1769423731170
+model_id: m-7dc8de96f1a3480bbdeed089489a62ae
+name: concrete_strength_xgboost
+run_id: a43a8efaaaf944978768096964f8be4c
+run_link: null
+source: models:/m-7dc8de96f1a3480bbdeed089489a62ae
+status: READY
+status_message: null
+storage_location: file:C:/Users/z004uhcp/Documents/Side Project/materialpassport-generator/mlruns/861824510682236281/models/m-7dc8de96f1a3480bbdeed089489a62ae/artifacts
+user_id: null
+version: 1

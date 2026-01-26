@@ -1,0 +1,10 @@
+artifact_location: file:C:/Users/z004uhcp/Documents/Side Project/materialpassport-generator/mlruns/271877070433879588/models/m-1dc382ace2d5485ea80f87c1015dc096/artifacts
+creation_timestamp: 1769436531848
+experiment_id: '271877070433879588'
+last_updated_timestamp: 1769436539055
+model_id: m-1dc382ace2d5485ea80f87c1015dc096
+model_type: null
+name: model
+source_run_id: 60741d824e8f4a9cbbb69da56465f71d
+status: 2
+status_message: null

@@ -1,0 +1,14 @@
+artifact_uri: file:C:/Users/z004uhcp/Documents/Side Project/materialpassport-generator/mlruns/861824510682236281/a6bdb700c90c4ac980f7bd7d1a009b25/artifacts
+end_time: 1769423714709
+entry_point_name: ''
+experiment_id: '861824510682236281'
+lifecycle_stage: active
+run_id: a6bdb700c90c4ac980f7bd7d1a009b25
+run_name: linear_regression_baseline
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1769423685561
+status: 3
+tags: []
+user_id: z004uhcp

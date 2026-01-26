@@ -1,0 +1,66 @@
+[
+  {
+    "feature": "age",
+    "importance": 0.24680864810943604
+  },
+  {
+    "feature": "paste_volume",
+    "importance": 0.16879908740520477
+  },
+  {
+    "feature": "total_binder",
+    "importance": 0.16580012440681458
+  },
+  {
+    "feature": "total_solid",
+    "importance": 0.08326198160648346
+  },
+  {
+    "feature": "cement",
+    "importance": 0.05590548738837242
+  },
+  {
+    "feature": "total_volume",
+    "importance": 0.05289031192660332
+  },
+  {
+    "feature": "water",
+    "importance": 0.04581499844789505
+  },
+  {
+    "feature": "slag_pct",
+    "importance": 0.02797180786728859
+  },
+  {
+    "feature": "fly_ash",
+    "importance": 0.025049949064850807
+  },
+  {
+    "feature": "slag",
+    "importance": 0.024699214845895767
+  },
+  {
+    "feature": "superplasticizer",
+    "importance": 0.02342865616083145
+  },
+  {
+    "feature": "fly_ash_pct",
+    "importance": 0.0220387801527977
+  },
+  {
+    "feature": "cement_pct",
+    "importance": 0.018142037093639374
+  },
+  {
+    "feature": "fine_aggregate",
+    "importance": 0.017149901017546654
+  },
+  {
+    "feature": "coarse_aggregate",
+    "importance": 0.011514962650835514
+  },
+  {
+    "feature": "total_aggregate",
+    "importance": 0.010724009945988655
+  }
+]

@@ -1,0 +1,15 @@
+creation_timestamp: 1769424195256
+current_stage: None
+deployment_job_state: null
+description: null
+last_updated_timestamp: 1769424195256
+model_id: m-8b8ef7c9540f41f39ed85b03f9e0f2e2
+name: concrete_strength_deep_nn
+run_id: a802f9b0014147c88433c654d2a34008
+run_link: null
+source: models:/m-8b8ef7c9540f41f39ed85b03f9e0f2e2
+status: READY
+status_message: null
+storage_location: file:C:/Users/z004uhcp/Documents/Side Project/materialpassport-generator/mlruns/309931904079522536/models/m-8b8ef7c9540f41f39ed85b03f9e0f2e2/artifacts
+user_id: null
+version: 1

@@ -1,0 +1,15 @@
+creation_timestamp: 1769424157721
+current_stage: None
+deployment_job_state: null
+description: null
+last_updated_timestamp: 1769424157721
+model_id: m-0be0a87b71914b37ae08f538b1a2946b
+name: concrete_strength_simple_nn
+run_id: 35f714657ecc496e97f00a47add4bd76
+run_link: null
+source: models:/m-0be0a87b71914b37ae08f538b1a2946b
+status: READY
+status_message: null
+storage_location: file:C:/Users/z004uhcp/Documents/Side Project/materialpassport-generator/mlruns/309931904079522536/models/m-0be0a87b71914b37ae08f538b1a2946b/artifacts
+user_id: null
+version: 1

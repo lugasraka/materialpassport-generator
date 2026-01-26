@@ -1,0 +1,82 @@
+[
+  {
+    "feature": "cement_age",
+    "importance": 0.17353719472885132
+  },
+  {
+    "feature": "water_binder_ratio",
+    "importance": 0.1645916849374771
+  },
+  {
+    "feature": "age",
+    "importance": 0.145773246884346
+  },
+  {
+    "feature": "total_binder",
+    "importance": 0.10889840871095657
+  },
+  {
+    "feature": "aggregate_binder_ratio",
+    "importance": 0.06738828867673874
+  },
+  {
+    "feature": "water_cement_ratio",
+    "importance": 0.04971494525671005
+  },
+  {
+    "feature": "cement_age_ratio",
+    "importance": 0.04776838794350624
+  },
+  {
+    "feature": "water_age",
+    "importance": 0.04382256418466568
+  },
+  {
+    "feature": "total_volume",
+    "importance": 0.03409948572516441
+  },
+  {
+    "feature": "total_solid",
+    "importance": 0.026215529069304466
+  },
+  {
+    "feature": "cement_superplasticizer",
+    "importance": 0.021028980612754822
+  },
+  {
+    "feature": "water",
+    "importance": 0.020770780742168427
+  },
+  {
+    "feature": "cement_slag",
+    "importance": 0.018070077523589134
+  },
+  {
+    "feature": "paste_volume",
+    "importance": 0.013683635741472244
+  },
+  {
+    "feature": "superplasticizer",
+    "importance": 0.013474584557116032
+  },
+  {
+    "feature": "water_superplasticizer",
+    "importance": 0.012360258027911186
+  },
+  {
+    "feature": "coarse_fine_aggregate",
+    "importance": 0.010238179937005043
+  },
+  {
+    "feature": "cement",
+    "importance": 0.010197722353041172
+  },
+  {
+    "feature": "cement_water",
+    "importance": 0.009932559914886951
+  },
+  {
+    "feature": "total_aggregate",
+    "importance": 0.008433511480689049
+  }
+]

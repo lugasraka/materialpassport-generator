@@ -1,0 +1,15 @@
+creation_timestamp: 1769423706565
+current_stage: None
+deployment_job_state: null
+description: null
+last_updated_timestamp: 1769423706565
+model_id: m-e559d6e2e0c14dd2a6981f979c7092de
+name: concrete_strength_linear_regression
+run_id: a6bdb700c90c4ac980f7bd7d1a009b25
+run_link: null
+source: models:/m-e559d6e2e0c14dd2a6981f979c7092de
+status: READY
+status_message: null
+storage_location: file:C:/Users/z004uhcp/Documents/Side Project/materialpassport-generator/mlruns/861824510682236281/models/m-e559d6e2e0c14dd2a6981f979c7092de/artifacts
+user_id: null
+version: 1

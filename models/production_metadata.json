@@ -1,0 +1,45 @@
+{
+  "model_name": "concrete_strength_xgboost",
+  "version": 3,
+  "mlflow_run_id": "ffeae41fe79945319dc4a88940f53ba7",
+  "performance": {
+    "test_r2": 0.9353001165623277,
+    "test_rmse": 4.083095030719391,
+    "test_mae": 2.624029373428196,
+    "cv_r2_mean": 0.9347002757479302,
+    "cv_r2_std": 0.015410206875342839
+  },
+  "hyperparameters": {
+    "n_estimators": 439,
+    "max_depth": 15,
+    "learning_rate": 0.05473157755138237,
+    "subsample": 0.5837419068252772,
+    "colsample_bytree": 0.6379623808381476,
+    "gamma": 0.2566623688695714,
+    "reg_alpha": 1.8850205603934291,
+    "reg_lambda": 0.5512728582442947,
+    "min_child_weight": 10,
+    "random_state": 42,
+    "n_jobs": -1
+  },
+  "features": [
+    "cement",
+    "slag",
+    "fly_ash",
+    "water",
+    "superplasticizer",
+    "coarse_aggregate",
+    "fine_aggregate",
+    "age",
+    "total_binder",
+    "total_aggregate",
+    "total_solid",
+    "cement_pct",
+    "slag_pct",
+    "fly_ash_pct",
+    "paste_volume",
+    "total_volume"
+  ],
+  "training_date": "2026-01-26 15:21:05",
+  "stage": "Production"
+}

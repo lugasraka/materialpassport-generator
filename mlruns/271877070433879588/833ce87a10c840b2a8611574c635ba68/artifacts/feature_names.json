@@ -1,0 +1,21 @@
+{
+  "features": [
+    "cement",
+    "slag",
+    "fly_ash",
+    "water",
+    "superplasticizer",
+    "coarse_aggregate",
+    "fine_aggregate",
+    "age",
+    "water_cement_ratio",
+    "water_binder_ratio",
+    "slag_cement_ratio",
+    "fly_ash_cement_ratio",
+    "supplementary_binder_ratio",
+    "fine_aggregate_ratio",
+    "aggregate_binder_ratio",
+    "superplasticizer_cement_ratio",
+    "cement_age_ratio"
+  ]
+}

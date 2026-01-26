@@ -1,0 +1,31 @@
+{
+  "features": [
+    "cement",
+    "slag",
+    "fly_ash",
+    "water",
+    "superplasticizer",
+    "coarse_aggregate",
+    "fine_aggregate",
+    "age",
+    "total_binder",
+    "total_aggregate",
+    "total_solid",
+    "cement_pct",
+    "slag_pct",
+    "fly_ash_pct",
+    "paste_volume",
+    "total_volume"
+  ],
+  "original_features": [
+    "cement",
+    "slag",
+    "fly_ash",
+    "water",
+    "superplasticizer",
+    "coarse_aggregate",
+    "fine_aggregate",
+    "age"
+  ],
+  "n_features": 16
+}
