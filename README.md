@@ -1,12 +1,12 @@
 # Material Passport Generator - AI/ML Project
 
-**Tagline:** Enabling Circular Economy Through AI-Powered Material Intelligence
+Enabling Circular Economy Through AI-Powered Material Intelligence
 
-## Project Status: MVP Launched ✅
+## Project Status: MVP Launched
 
 A fully functional web application that uses AI/ML to automatically generate digital material passports for concrete products, complete with sustainability metrics and PDF export capabilities.
 
-**🚀 Live MVP:** Streamlit web application with XGBoost-powered predictions
+**Live MVP:** Streamlit web application with XGBoost-powered predictions and multilingual support
 
 ## Project Vision
 
@@ -18,22 +18,22 @@ The construction industry generates 1.3 billion tons of waste annually. Digital 
 
 ## Current Features (MVP - V1)
 
-### ✅ Implemented
+### Core Capabilities
 - **AI-Powered Predictions:** XGBoost model (R² = 0.91, RMSE = 4.81 MPa) predicts concrete compressive strength
 - **Sustainability Metrics:** Automatic calculation of recycled content, circularity score (0-100), and CO₂ emissions
 - **Digital Passport Generation:** Professional passport display with grades A-E based on sustainability
 - **PDF Export:** Download complete material passports as formatted PDF documents
 - **Interactive Web UI:** Streamlit-based interface with real-time predictions
+- **Multilingual Support:** Interface available in multiple languages
 - **Compliance Ready:** EU Digital Product Passport and EN 206 standards alignment
 - **User Education:** Built-in tooltips and explanations for all metrics
-- **Feedback System:** Collect user ratings and feature requests
+- **Feedback System:** User ratings and feature requests collection
 
-### 🎯 Key Capabilities
-- Generate material passports in **< 2 minutes** (vs 5+ hours manual)
+### Performance
+- Generate material passports in under 2 minutes (vs 5+ hours manual)
 - Support for 8 concrete composition parameters
 - Real-time sustainability grade calculation
 - Benchmark against industry averages
-- Professional PDF export for documentation
 
 ## Dataset
 
@@ -56,35 +56,36 @@ The construction industry generates 1.3 billion tons of waste annually. Digital 
 
 ## AI/ML Development Progress
 
-### Phase 1: Foundation ✅ (Complete)
-- [x] Data acquisition and exploration
-- [x] Baseline regression models (Linear, Random Forest, XGBoost)
-- [x] Feature engineering for recyclability scoring
-- [x] Sustainability metrics calculation
-- [x] **Model Performance:** XGBoost R² = 0.91, RMSE = 4.81 MPa
+### Phase 1: Foundation (Complete)
+- Data acquisition and exploration
+- Baseline regression models (Linear, Random Forest, XGBoost)
+- Feature engineering for recyclability scoring
+- Sustainability metrics calculation
+- Model Performance: XGBoost R² = 0.91, RMSE = 4.81 MPa
 
-### Phase 2: Deep Learning ✅ (Complete)
-- [x] Neural network for strength prediction
-- [x] Multi-task learning (strength + recyclability)
-- [x] Model comparison and selection
-- [x] Production model deployment (XGBoost selected)
+### Phase 2: Deep Learning (Complete)
+- Neural network for strength prediction
+- Multi-task learning (strength + recyclability)
+- Model comparison and selection
+- Production model deployment (XGBoost selected)
 
-### Phase 3: Web Application ✅ (MVP Complete)
-- [x] Streamlit web application
-- [x] Interactive UI with real-time predictions
-- [x] Sustainability metrics dashboard
-- [x] PDF export functionality
-- [x] User feedback collection system
-- [x] Three-tab interface (Generator, About AI/ML, About Developer)
+### Phase 3: Web Application (MVP Complete)
+- Streamlit web application
+- Interactive UI with real-time predictions
+- Sustainability metrics dashboard
+- PDF export functionality
+- User feedback collection system
+- Multilingual interface support
+- Three-tab interface (Generator, About AI/ML, About Developer)
 
-### Phase 4: Future Enhancements 🚧 (Roadmap)
-- [ ] Multiple material types (steel, wood, masonry)
-- [ ] Batch processing for multiple compositions
-- [ ] Historical data tracking and comparison
-- [ ] API development for integration
-- [ ] Advanced visualization and analytics
-- [ ] Environmental condition factors
-- [ ] Confidence intervals for predictions
+### Phase 4: Future Enhancements (Roadmap)
+- Multiple material types (steel, wood, masonry)
+- Batch processing for multiple compositions
+- Historical data tracking and comparison
+- API development for integration
+- Advanced visualization and analytics
+- Environmental condition factors
+- Confidence intervals for predictions
 
 ## Learning Objectives
 
@@ -144,7 +145,7 @@ material-passport-generator/
 │   ├── scaler_y_str.pkl              # Strength target scaler
 │   └── scaler_y_circ.pkl             # Circularity target scaler
 ├── webapp/                           # Web application
-│   └── mvp/                          # MVP Streamlit application ✅
+│   └── mvp/                          # MVP Streamlit application
 │       ├── app.py                    # Main application
 │       ├── requirements_mvp.txt      # Dependencies
 │       ├── run.sh                    # Launch script
@@ -215,48 +216,47 @@ jupyter notebook notebooks/01_data_exploration.ipynb
 
 ## Key Metrics & Success Criteria
 
-### Technical Metrics (Achieved ✅):
-- **Strength Prediction:** R² = 0.91 (Target: > 0.85) ✅
-- **RMSE:** 4.81 MPa (Target: < 5 MPa) ✅
-- **Model Inference:** < 100ms per passport ✅
+### Technical Metrics (Achieved):
+- **Strength Prediction:** R² = 0.91 (Target: > 0.85)
+- **RMSE:** 4.81 MPa (Target: < 5 MPa)
+- **Model Inference:** < 100ms per passport
 
-### Impact Metrics (Implemented ✅):
-- **Material Reuse Potential:** Calculate % recycled content ✅
-- **Carbon Footprint:** Estimate CO₂ based on composition ✅
-- **Circularity Score:** 0-100 scale based on recyclability ✅
-- **Sustainability Grading:** A-E grade system ✅
+### Impact Metrics (Implemented):
+- **Material Reuse Potential:** Calculate percentage of recycled content
+- **Carbon Footprint:** Estimate CO₂ based on composition
+- **Circularity Score:** 0-100 scale based on recyclability
+- **Sustainability Grading:** A-E grade system
 
 ### Product Metrics (MVP Goals):
-- **Time Saved:** 90% reduction in manual passport creation (~5 hours → < 2 minutes) ✅
+- **Time Saved:** 90% reduction in manual passport creation (5 hours to under 2 minutes)
 - **User Adoption:** Target 20+ unique users in Week 1
-- **Completion Rate:** > 60% of users generate full passport
-- **User Satisfaction:** > 3.5/5 rating
+- **Completion Rate:** Target >60% of users generate full passport
+- **User Satisfaction:** Target >3.5/5 rating
 - **Feature Requests:** Collect feedback for V2 roadmap
 
 ## Use Cases & Target Users
 
-### 1. **Manufacturers (Sustainability Managers)**
-   - Auto-generate EU-compliant Digital Product Passports
-   - Save 5+ hours per product vs manual calculation
-   - Ensure EN 206 standards compliance
-   - **Current Status:** Fully supported in MVP ✅
+### Primary Users (Fully Supported in MVP)
 
-### 2. **Consultants (Circular Economy Specialists)**
-   - Rapid material analysis and circularity scoring
-   - Benchmark compositions against industry averages
-   - Generate professional reports for clients
-   - **Current Status:** Fully supported in MVP ✅
+**1. Manufacturers (Sustainability Managers)**
+- Auto-generate EU-compliant Digital Product Passports
+- Save 5+ hours per product vs manual calculation
+- Ensure EN 206 standards compliance
 
-### 3. **Architects/Designers**
-   - Evaluate material sustainability during design phase
-   - Compare different concrete compositions
-   - Support green building certification (LEED, BREEAM)
-   - **Current Status:** Fully supported in MVP ✅
+**2. Consultants (Circular Economy Specialists)**
+- Rapid material analysis and circularity scoring
+- Benchmark compositions against industry averages
+- Generate professional reports for clients
 
-### 4. **Future Use Cases** (Roadmap)
-   - Recyclers: Assess recyclability of demolition materials
-   - Regulators: Verify compliance with circular economy regulations
-   - Researchers: Analyze material composition trends
+**3. Architects/Designers**
+- Evaluate material sustainability during design phase
+- Compare different concrete compositions
+- Support green building certification (LEED, BREEAM)
+
+### Future Use Cases (Roadmap)
+- **Recyclers:** Assess recyclability of demolition materials
+- **Regulators:** Verify compliance with circular economy regulations
+- **Researchers:** Analyze material composition trends
 
 ## Technology Stack
 
@@ -288,50 +288,50 @@ For detailed information about the project:
 
 ## Documentation Strategy
 
-### Product Management Artifacts:
-1. **Product Requirements Document (PRD)** ✅
-   - Problem statement and market analysis
-   - User personas and jobs-to-be-done
-   - Feature prioritization (MoSCoW)
-   - Success metrics and KPIs
+### Product Management Artifacts
 
-2. **MVP Documentation** ✅
-   - Complete feature documentation
-   - User guides and tutorials
-   - Deployment instructions
-   - Feedback collection plan
+**1. Product Requirements Document (PRD)**
+- Problem statement and market analysis
+- User personas and jobs-to-be-done
+- Feature prioritization (MoSCoW)
+- Success metrics and KPIs
 
-3. **Technical Documentation** ✅
-   - Model performance metrics
-   - Architecture decisions
-   - API documentation (future)
-   - Code documentation in notebooks
+**2. MVP Documentation**
+- Complete feature documentation
+- User guides and tutorials
+- Deployment instructions
+- Feedback collection plan
 
-## Next Steps & Roadmap
+**3. Technical Documentation**
+- Model performance metrics
+- Architecture decisions
+- API documentation (future)
+- Code documentation in notebooks
 
-### Immediate (Week 1-2)
-- [ ] Deploy MVP to Streamlit Cloud
-- [ ] Collect user feedback from 20+ testers
-- [ ] Analyze usage patterns and completion rates
-- [ ] Document feature requests for V2
+## Development Roadmap
 
-### Short-term (Month 1-2)
-- [ ] Implement most-requested features
-- [ ] Add batch processing capabilities
-- [ ] Improve PDF export with custom branding
-- [ ] Add data export (CSV, JSON)
+### Immediate Priorities
+- Deploy MVP to Streamlit Cloud
+- Collect user feedback from 20+ testers
+- Analyze usage patterns and completion rates
+- Document feature requests for V2
 
-### Medium-term (Month 3-6)
-- [ ] Expand to additional material types (steel, wood)
-- [ ] Build REST API for integrations
-- [ ] Add user authentication and saved passports
-- [ ] Develop mobile-responsive design
+### Short-term Enhancements
+- Implement most-requested features
+- Add batch processing capabilities
+- Improve PDF export with custom branding
+- Add data export (CSV, JSON)
 
-### Long-term (6+ months)
-- [ ] Multi-language support
-- [ ] Integration with BIM software
-- [ ] Machine learning model improvements with user data
-- [ ] Enterprise features and SaaS model
+### Medium-term Goals
+- Expand to additional material types (steel, wood)
+- Build REST API for integrations
+- Add user authentication and saved passports
+- Develop mobile-responsive design
+
+### Long-term Vision
+- Integration with BIM software
+- Machine learning model improvements with user data
+- Enterprise features and SaaS model
 
 ## References & Citations
 

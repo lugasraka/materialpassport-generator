@@ -476,6 +476,22 @@ custom_css = """
         color: white;
         font-weight: bold;
     }
+
+    /* Enlarge tab size */
+    [data-testid="stTabList"] button {
+        font-size: 1.1rem;
+        font-weight: 600;
+        padding: 0.75rem 1.5rem;
+        min-height: 3rem;
+    }
+
+    [data-testid="stTabList"] {
+        gap: 0.5rem;
+    }
+
+    [data-testid="stTabList"] button[aria-selected="true"] {
+        font-size: 1.2rem;
+    }
 </style>
 """
 
@@ -1140,9 +1156,43 @@ def display_passport(input_data, prediction, metrics):
             - **350-400 kg/m³**: Moderate
             - **400+ kg/m³**: High (needs improvement)
             
-            Industry avg: 320 kg/m³ 🌍
+             Industry avg: 320 kg/m³ 🌍
             """)
-    
+
+        with st.expander("ℹ️ Methodology", expanded=False):
+            st.info("""
+            **How Metrics Are Calculated**
+            
+            **Recycled Content (%)**
+            - Formula: (Slag + Fly Ash) / Total Mass × 100
+            - Slag and fly ash are industrial byproducts that replace cement
+            
+            **CO₂ Emissions (kg/m³)**
+            - Cement: 0.85 kg CO₂ per kg cement
+            - Slag: 0.07 kg CO₂ per kg slag
+            - Fly Ash: 0.01 kg CO₂ per kg fly ash
+            - Sum of all component emissions
+            
+            **Circularity Score (0-100)**
+            - Formula: Recycled Content × 3 + Low Carbon Bonus (20 pts if CO₂ < 300)
+            - Max score capped at 100
+            - Higher score = better material circularity
+            
+            **Sustainability Grade**
+            - Based on Circularity Score thresholds:
+            - **A (≥80)**: Excellent - High recycled content, low CO₂
+            - **B (60-79)**: Good - Moderate recycled content
+            - **C (40-59)**: Moderate - Some recycled content
+            - **D (20-39)**: Poor - Low recycled content
+            - **E (<20)**: Very Poor - Minimal recycled content
+            
+            **Formula Reference:**
+            ```
+            Circularity Score = min(100, Recycled% × 3 + [CO₂ < 300] × 20)
+            Grade = f(Circularity Score)
+            ```
+            """)
+
     # Material composition table
     st.markdown("#### 📊 Material Composition")
     
@@ -1467,26 +1517,7 @@ def about_ai_ml():
     }
     
     st.dataframe(pd.DataFrame(comparison_data), use_container_width=True, hide_index=True)
-    
-    # Useful resources
-    st.markdown("## 📚 Learning Resources")
-    
-    st.markdown("""
-    **For XGBoost:**
-    - [XGBoost Documentation](https://xgboost.readthedocs.io/)
-    - [XGBoost Tutorials](https://xgboost.readthedocs.io/en/latest/tutorials/)
-    - [Gradient Boosting explained](https://machinelearningmastery.com/gentle-introduction-gradient-boosting-algorithm-machine-learning/)
-    
-    **For Concrete Technology:**
-    - [ACI Manual of Concrete Practice](https://www.concrete.org/)
-    - [EN 206 Concrete Standards](https://en-standard.eu/)
-    - [Concrete Design & Construction](https://www.concretedesign.co.uk/)
-    
-    **For Machine Learning:**
-    - [Scikit-learn Documentation](https://scikit-learn.org/)
-    - [Hands-On Machine Learning](https://www.oreilly.com/library/view/9780596529321)
-    - [Machine Learning Mastery](https://machinelearningmastery.com/)
-    """)
+
 
 # About Developer Tab
 def about_developer():
@@ -1583,6 +1614,13 @@ def main():
             st.markdown(f"### {get_text('input_composition')}")
             st.markdown(get_text('enter_mix_design'))
             
+            # Handle reset BEFORE creating widgets
+            if 'reset_needed' in st.session_state and st.session_state.reset_needed:
+                for key in MIX_PRESETS['Standard Concrete'].keys():
+                    if key not in ['description', 'key', 'desc_key']:
+                        st.session_state[f'input_{key}'] = MIX_PRESETS['Standard Concrete'][key]
+                st.session_state.reset_needed = False
+            
             # NEW FEATURE: Quick Presets
             st.markdown(f"#### {get_text('presets')}")
             preset_cols = st.columns(4)
@@ -1640,9 +1678,7 @@ def main():
                 reset_button = st.button(get_text("reset"), use_container_width=True)
             
             if reset_button:
-                for key in MIX_PRESETS['Standard Concrete'].keys():
-                    if key != 'description':
-                        st.session_state[f'input_{key}'] = MIX_PRESETS['Standard Concrete'][key]
+                st.session_state.reset_needed = True
                 st.rerun()
             
             # NEW FEATURE: Save current mix
